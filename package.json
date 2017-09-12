@@ -1,6 +1,6 @@
 {
   "name": "jean-interface",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Provides functionality for an object orientated interface mechanism",
   "main": ".js",
   "scripts": {
