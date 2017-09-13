@@ -443,13 +443,17 @@ var requirejs, require, define;
 
 define("node_modules/almond/almond", function(){});
 
-define('InterfaceError',[], function () {
-    var InterfaceError = function (message) {
-        this.name = "Interface Error";
-        this.message = (message || "Method must be implemented in Class");
+define('NotImplementedError',[], function () {
+    /**
+     * Represents a error message for non implemented methods
+     * @param {String} message - message of error
+     */
+    var NotImplementedError = function (message) {
+        this.name = "NotImplementedError";
+        this.message = (message || "Function must be implemented in Class");
     };
-    InterfaceError.prototype = Error.prototype;
-    return InterfaceError; 
+    NotImplementedError.prototype = Error.prototype; 
+    return NotImplementedError; 
 }); 
 define('TypeCheck',[], function () {
     return {
@@ -580,13 +584,13 @@ define('TypeCheck',[], function () {
         }
     };
 });
-define('src/Interface',["InterfaceError", "TypeCheck"], function (InterfaceError, TypeCheck) {
+define('src/Interface',["NotImplementedError", "TypeCheck"], function (NotImplementedError, TypeCheck) {
     return {
         /**
          * Checks if the <functionList>, is implemented in prototype of <instance>
          * @public
          * @memberof Util
-         * @throws {InterfaceError} - If method is not implemented
+         * @throws {NotImplementedError} - If method is not implemented
          * @param {String[]} functionList - Contains all function names
          * @param {Object} instance - Object which should be checked
          * @returns {Boolean} - True, if interface is implemented, false otherwise
@@ -601,7 +605,7 @@ define('src/Interface',["InterfaceError", "TypeCheck"], function (InterfaceError
             var prototype = Object.getPrototypeOf(instance);
             for (var i = 0; i < functionList.length; i++) {
                 if (!prototype.hasOwnProperty(functionList[i])) {
-                    throw new InterfaceError("Method " + functionList[i] + " must be implemented in Class");
+                    throw new NotImplementedError("Method " + functionList[i] + " must be implemented in Class");
                 }
             }
             return true;

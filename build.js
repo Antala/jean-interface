@@ -18,7 +18,7 @@
         "}));"
     },
     paths: {
-        InterfaceError: "node_modules/jean-core-type/src/error/InterfaceError",
+        NotImplementedError: "node_modules/jean-core-type/src/error/NotImplementedError",
         TypeCheck: "node_modules/jean-type-check/src/TypeCheck"
     }
 })

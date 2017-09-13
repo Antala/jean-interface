@@ -24,7 +24,7 @@ define([
                 try {
                     Interface.isImplemented([methodNameOne, methodNameTwo, methodNameThree], test);
                 } catch (e) {
-                    expect(e instanceof CoreType.InterfaceError).toBe(true);
+                    expect(e instanceof CoreType.NotImplementedError).toBe(true);
                 }
             });
             it("TODO: Pass interface list which have false type | EXPECTATION: Return false", function () {

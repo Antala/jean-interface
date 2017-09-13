@@ -11,8 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "almond": "^0.3.3",
-    "jean-core-type": "0.0.3",
-    "jean-type-check": "0.0.3"
+    "jean-core-type": "0.0.5",
+    "jean-type-check": "0.0.4"
   },
   "repository": {
     "type": "git",
