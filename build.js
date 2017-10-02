@@ -1,8 +1,9 @@
 ({
     baseUrl: '.',
-    out: 'dist/Interface.js',
-    optimize: 'none',
-    include: ["node_modules/almond/almond", "src/Interface"],
+    out: 'dist/jean-interface.js',
+    optimize: 'uglify2',
+    name: "node_modules/jean-amd/dist/jean-amd",
+    include: ["src/Interface"],
     wrap: {
         start: 
         "(function (root, factory) { \n" +

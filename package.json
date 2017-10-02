@@ -1,8 +1,8 @@
 {
   "name": "jean-interface",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Provides functionality for an object orientated interface mechanism",
-  "main": ".js",
+  "main": "jean-interface.js",
   "scripts": {
     "test": "open spec/spec-runner.html in browser"
   },
@@ -10,9 +10,9 @@
   "author": "Jeremias Andris",
   "license": "MIT",
   "dependencies": {
-    "almond": "^0.3.3",
-    "jean-core-type": "0.0.5",
-    "jean-type-check": "0.0.4"
+    "jean-amd": "0.0.5",
+    "jean-core-type": "0.0.8",
+    "jean-type-check": "0.0.6"
   },
   "repository": {
     "type": "git",
