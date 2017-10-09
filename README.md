@@ -1,31 +1,43 @@
 
 ## Description
 
-Provides functionality to check, if an  class implements functions which are defined
-interface-like in an base class.
+Provides functionality to check, if an  class implements functions which are defined interface-like in an base class.
+
+## Support
+Supports both CommonJS and AMD eco system. If there is no loader, Interface is registered as a browser variable.
 
 ## Code Example
+- Use it as browser variable
+```js
+var BaseClass = (function (){
+    var BaseClass = function(){
+        // If inherited class does not implement "add" & "remove"
+        // a error is fired
+        Interface.isImplemented(["add", "remove"], this); 
+    };
+    return BaseClass;
+})();
 
-```javascript
-// Define class with functions
-define(["path/to/Interface"], function(Interface){
-     var BaseClass = function(){
-         // If not implemented, exception will be thrown
-         Interface.isImplemented(["add", "remove"], this); 
-     };
-     return Test;
-});
-
-define(["path/to/BaseClass"], function(BaseClass){
+var ChildClass = (function(){
     var ChildClass = function(){
         BaseClass.call(this);
     };
-
+    // Interface method
     ChildClass.prototype.add = function () {};
+    // Interface method
     ChildClass.prototype.remove = function(){};
-
     return ChildClass;
+})();   
+```
+- Use it with require.js
+```javascript
+require(["path/to/Interface"], function(Interface){
+    // Work with Interface
 });
+```
+- Use it with node.js
+```js
+var Interface = require("jean-interface");
 ```
 
 ## Installation
