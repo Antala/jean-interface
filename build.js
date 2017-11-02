@@ -21,7 +21,7 @@
         "}));"
     },
     paths: {
-        NotImplementedError: "node_modules/jean-core-type/src/error/NotImplementedError",
+        NotImplementedError: "src/NotImplementedError",
         TypeCheck: "node_modules/jean-type-check/src/TypeCheck"
     }
 })
