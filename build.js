@@ -22,6 +22,7 @@
     },
     paths: {
         NotImplementedError: "src/NotImplementedError",
-        TypeCheck: "node_modules/jean-type-check/src/TypeCheck"
+        TypeCheck: "node_modules/jean-type-check/src/TypeCheck",
+        Failure: "node_modules/jean-failure/src/Failure"
     }
 })

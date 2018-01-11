@@ -4,38 +4,72 @@ define([
 ], function (Interface, NotImplementedError) {
     describe('Interface.spec.js', function () {
         describe("Interface", function () {
-            it("All necessary methods are available", function () {
-                var numberOfMethods = 1;
-                expect(Object.keys(Interface).length).toEqual(numberOfMethods);
-                expect(Interface.isImplemented).not.toBeUndefined();
+            describe("Interface.areMembersImplemented", function () {
+                var A = function () { // jscs:ignore
+                    this.a = "a";
+                    this.b = "b";
+                    this.c = "c";
+                }, a = new A();
+                it("Responds with true, if members are correctly implemented", function () {
+                    expect(Interface.areMembersImplemented(["a", "b"], a)).toBe(true);
+                });
+                it("Throws TypeError, If instance is not an object", function () {
+                    try {
+                        Interface.areMembersImplemented(["a", "b", "c"], 1);
+                    } catch (e) {
+                        expect(e instanceof TypeError).toBe(true);
+                    }
+                });
+                it("Throws TypeError, If methodList is no a string array", function () {
+                    try {
+                        Interface.areMembersImplemented([1, 2, 3], a);
+                    } catch (e) {
+                        expect(e instanceof TypeError).toBe(true);
+                    }
+                });
+                it("Throws NotImplementedError, if a method is not implemented", function () {
+                    try {
+                        Interface.areMembersImplemented(["a", "b", "c", "d"], a);
+                    } catch (e) {
+                        expect(e instanceof NotImplementedError).toBe(true);
+                    }
+                });
+            });
+            describe("Interface.areMethodsImplemented", function () {
+                var methodNameOne = "methodOne",
+                    methodNameTwo = "methodTwo",
+                    methodNameThree = "methodThree";
+                var Test = function () { }; // jscs:ignore
+                Test.prototype[methodNameOne] = function () { }; // jscs:ignore
+                Test.prototype[methodNameTwo] = function () { }; // jscs:ignore
+                var test = new Test();
+                it("Responds with true, if methods are correctly implemented", function () {
+                    expect(Interface.areMethodsImplemented([methodNameOne, methodNameTwo], test)).toBe(true);
+                });
+                it("Throws TypeError, If instance is not an object", function () {
+                    try {
+                        Interface.areMethodsImplemented([methodNameOne, methodNameTwo, methodNameThree], 1);
+                    } catch (e) {
+                        expect(e instanceof TypeError).toBe(true);
+                    }
+                });
+                it("Throws TypeError, If methodList is no a string array", function () {
+                    try {
+                        Interface.areMethodsImplemented([1, 2, 3], test);
+                    } catch (e) {
+                        expect(e instanceof TypeError).toBe(true);
+                    }
+                });
+                it("Throws NotImplementedError, if a method is not implemented", function () {
+                    try {
+                        Interface.areMethodsImplemented([methodNameOne, methodNameTwo, methodNameThree], test);
+                    } catch (e) {
+                        expect(e instanceof NotImplementedError).toBe(true);
+                    }
+                });
             });
         });
-        describe("Interface.isImplemented", function () {
-            var methodNameOne = "methodOne",
-                methodNameTwo = "methodTwo",
-                methodNameThree = "methodThree";
-            var Test = function () { }; // jscs:ignore
-            Test.prototype[methodNameOne] = function () { }; // jscs:ignore
-            Test.prototype[methodNameTwo] = function () { }; // jscs:ignore
-            var test = new Test();
-            it("Responds with true, if interface is correctly implemented", function () {
-                expect(Interface.isImplemented([methodNameOne, methodNameTwo], test)).toBe(true);
-            });
-            it("Responds with false, if the interface list elements arent strings", function () {
-                expect(Interface.isImplemented([1, 2, 3], test)).toBe(false);
-            });
-            it("Responds with false, if no class instance is passed", function () {
-                expect(Interface.isImplemented([methodNameOne, methodNameTwo])).toBe(false);
-            });
-            it("Throws NotImplementedError, if a method is not implemented", function () {
-                try {
-                    Interface.isImplemented([methodNameOne, methodNameTwo, methodNameThree], test);
-                } catch (e) {
-                    expect(e instanceof NotImplementedError).toBe(true);
-                }
-            });
 
-        });
         describe("NotImplementedError", function () {
             var ie = {};
             beforeEach(function () {
