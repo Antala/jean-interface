@@ -20,16 +20,23 @@ define([
                         expect(e instanceof TypeError).toBe(true);
                     }
                 });
-                it("Throws TypeError, If methodList is no a string array", function () {
+                it("Throws TypeError, If memberList is no a string array", function () {
                     try {
                         Interface.areMembersImplemented([1, 2, 3], a);
                     } catch (e) {
                         expect(e instanceof TypeError).toBe(true);
                     }
                 });
-                it("Throws NotImplementedError, if a method is not implemented", function () {
+                it("Throws NotImplementedError, if a member is not implemented", function () {
                     try {
                         Interface.areMembersImplemented(["a", "b", "c", "d"], a);
+                    } catch (e) {
+                        expect(e instanceof NotImplementedError).toBe(true);
+                    }
+                });
+                it("Throws NotImplementedError, which shows all members, which are not implemented", function () {
+                    try {
+                        Interface.areMembersImplemented(["a", "b", "c", "d", "aa", "bb", "cc"], a);
                     } catch (e) {
                         expect(e instanceof NotImplementedError).toBe(true);
                     }
@@ -63,6 +70,13 @@ define([
                 it("Throws NotImplementedError, if a method is not implemented", function () {
                     try {
                         Interface.areMethodsImplemented([methodNameOne, methodNameTwo, methodNameThree], test);
+                    } catch (e) {
+                        expect(e instanceof NotImplementedError).toBe(true);
+                    }
+                });
+                it("Throws NotImplementedError, which shows all methods, which are not implemented", function () {
+                    try {
+                        Interface.areMethodsImplemented(["a", "b", "c", "d"], test);
                     } catch (e) {
                         expect(e instanceof NotImplementedError).toBe(true);
                     }

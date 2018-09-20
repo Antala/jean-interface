@@ -18,10 +18,15 @@ define(["NotImplementedError", "TypeCheck", "Failure"], function (NotImplemented
             if (!TypeCheck.isArrayTypeOf(memberList, "string")) {
                 Failure.throwTypeError("memberList is no a string array");
             }
-            for (var i = 0; i < memberList.length; i++) {
-                if (!instance.hasOwnProperty(memberList[i])) {
-                    throw new TypeError("Member <" + memberList[i] + "> is not implemented");
+            var i, length = memberList.length, member = "", notImplementedMembers = [];
+            for (i = 0; i < length; i++) {
+                member = memberList[i];
+                if (!instance.hasOwnProperty(member)) {
+                    notImplementedMembers.push(member);
                 }
+            }
+            if (notImplementedMembers.length > 0) {
+                throw new TypeError("Members " + notImplementedMembers.join(" ") + " are not implemented");
             }
             return true;
         },
@@ -43,11 +48,15 @@ define(["NotImplementedError", "TypeCheck", "Failure"], function (NotImplemented
             if (!TypeCheck.isArrayTypeOf(methodList, "string")) {
                 Failure.throwTypeError("methodList is no a string array");
             }
-            var prototype = Object.getPrototypeOf(instance);
-            for (var i = 0; i < methodList.length; i++) {
-                if (!prototype.hasOwnProperty(methodList[i])) {
-                    throw new NotImplementedError("Method " + methodList[i] + " is not implemented");
+            var i, length = methodList.length, method = "", prototype = Object.getPrototypeOf(instance), notImplementedMethods = [];
+            for (i = 0; i < length; i++) {
+                method = methodList[i];
+                if (!prototype.hasOwnProperty(method)) {
+                    notImplementedMethods.push(method);
                 }
+            }
+            if (notImplementedMethods.length > 0) {
+                throw new NotImplementedError("Methods " + notImplementedMethods.join(" ") + " are not implemented");
             }
             return true;
         }
